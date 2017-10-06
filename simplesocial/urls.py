@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf import settings
 from . import views
 
 app_name = 'base'
@@ -26,4 +27,12 @@ urlpatterns = [
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^test/$', views.TestPage.as_view(), name='test'),
     url(r'^thanks/$', views.ThanksPage.as_view(), name='thanks'),
+    url(r'^posts/', include('posts.urls', namespace='posts')),
+    url(r'^groups/', include('groups.urls', namespace='groups')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls))
+    ] + urlpatterns

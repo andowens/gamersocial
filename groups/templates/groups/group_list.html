@@ -20,22 +20,24 @@
 {% endblock %}
 
 {% block group_content %}
-    {% for group in object_list %}
-        <a href="{% url 'groups:single' slug=group.slug %}" class="list-group-item">
-            <h3 class="title list-group-item-heading">{{ group.name }}</h3>
-            <div class="list-group-item container-fluid">
-                {{ group.desctription_html|safe }}
-                <div class="row">
-                    <div class="col-md-4">
-                        <span class="badge">{{ group.members.count }}</span>
-                        member{{ group.members.count|pluralize }}
-                    </div>
-                    <div class="col-md-4">
-                        <span class="badge">{{ group.posts.count }}</span>
-                        post{{ group.posts.count|pluralize }}
+    <div class="col-md-8">
+        {% for group in object_list %}
+            <a href="{% url 'groups:single' slug=group.slug %}" class="list-group-item">
+                <h3 class="title list-group-item-heading">{{ group.name }}</h3>
+                <div class="list-group-item container-fluid">
+                    {{ group.desctription_html|safe }}
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span class="badge">{{ group.members.count }}</span>
+                            member{{ group.members.count|pluralize }}
+                        </div>
+                        <div class="col-md-4">
+                            <span class="badge">{{ group.posts.count }}</span>
+                            post{{ group.posts.count|pluralize }}
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    {% endfor %}
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}
